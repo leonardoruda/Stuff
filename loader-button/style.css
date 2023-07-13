@@ -1,0 +1,52 @@
+:root {
+    --color-linear: #bd4601;
+}
+
+@keyframes loader {
+    0% {
+        border-color: transparent transparent #bd4601 transparent;
+    }
+    25% {
+        border-color: transparent transparent transparent rgb(190, 71, 2);
+    }
+    50% {
+        border-color: rgb(190, 71, 2) transparent transparent transparent;
+    }
+    100% {
+        border-color: transparent rgb(190, 71, 2) transparent transparent
+    }
+}
+
+.container {
+    height: 100px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin: 1rem;
+    padding: 1rem;
+    gap: 5px;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 3rem;
+    border-radius: 50%;
+    border: 5px solid /*black*/;
+    border-color: transparent;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+button {
+    width: auto;
+    background-color: var(--color-linear);
+    color: white;
+    padding: .8em;
+    border-radius: 5px;
+}
+button:hover {
+    cursor: pointer;
+    transform: scale(.98);
+}
