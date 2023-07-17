@@ -21,15 +21,15 @@ Acredito que seja algum problema com as configurações do meu express-handlebar
 <div class="container flex justify-content-center">
     <ul style="columns: 2; list-style-type: none">
             {{#each members}}
-                <li class="list-group-item" style="display: flex; justify-content:flex-end; align-items:center; gap: 10px">{{this.name}} - {{this.email}} <a href="/api/members/delete/{{this.id}}"><button class="btn btn-danger p-1 m-2">Apagar</button></a></li>
+                <li class="list-group-item" style="display: flex; justify-content:space-between; align-items:center; gap: 10px">{{this.name}} - {{this.email}} <a href="/api/members/{{this._id}}/delete"><button class="btn btn-danger p-1 m-2">Apagar</button></a></li>
     
             {{/each}}
     </ul>
 </div>
 
 <script>
-    document.querySelector('a').addEventListener('click', (a) {
-        a.preventDefault();
-        alert('Membro excluído! Por favor, atualize a página')
-    })
+    //document.querySelector('a').addEventListener('click', (a) {
+        //a.preventDefault();
+        //alert('Membro excluído! Por favor, atualize a página')
+    //})
 </script>

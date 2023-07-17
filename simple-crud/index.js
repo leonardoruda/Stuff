@@ -4,18 +4,20 @@ const exphbs = require('express-handlebars');
 const router = require('./api/members');
 const Member = require('./api/models/Members');
 
-mongoose.connect('mongodb://127.0.0.1:27017/Members');
-const db = mongoose.connection;
-db.once('open', () => console.log('Connected to database'));
-db.on('error', (err) => console.log(err));
+mongoose.connect('mongodb://127.0.0.1:27017/Members', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(console.log('Connected to database'))
+.catch((err) => console.log('Error: ', err));
 
 const app = express();
 
 app.engine('handlebars', exphbs.create().engine);
 app.set('view engine', 'handlebars');
 
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
 
 app.get('/', async (req, res) => {
     let members = await Member.find({}).lean();
