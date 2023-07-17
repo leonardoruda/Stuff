@@ -4,14 +4,13 @@ const Member = require('./models/Members');
 
 const getAll = router.get('/', async (req, res) => {
     const members = await Member.find({});
-
     res.status(200).json({members});
 })
 
 const getOne = router.get('/:id', async (req, res) => {
     let {id} = req.params;
     const member = await Member.findById(id);
-    console.log(member);
+    res.status(200).json({member});
 })
 
 const addMember = router.post('/', async (req, res) => {
@@ -22,11 +21,11 @@ const addMember = router.post('/', async (req, res) => {
     res.redirect('/');
 })
 
-const deleteMember = router.get('/delete/:id', async (req, res) => {
+const deleteMember = router.get('/:id/delete', async (req, res) => {
     let {id} = req.params;
-    console.log(id);
+    
     await Member.findByIdAndDelete(id);
-    res.sen('/api/members');
+    res.redirect('/');
     //res.status(200).json({message: 'Membro excluído!'});
 })
 
