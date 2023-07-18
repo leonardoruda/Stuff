@@ -57,8 +57,9 @@ h2 {
     border-radius: 50%;
     border: 5px solid /*black*/;
     border-color: transparent;
-    animation-duration: .5s;
+    animation-duration: 750ms;
     animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
 }
 
 .box2 {
@@ -67,8 +68,9 @@ h2 {
     margin-bottom: 3em;
     border-radius: 50px;
     border: 5px solid transparent;
-    animation-duration: .5s;
+    animation-duration: 500ms;
     animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
 }
 
 button {
