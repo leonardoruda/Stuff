@@ -21,6 +21,35 @@ const addMember = router.post('/', async (req, res) => {
     res.redirect('/');
 })
 
+const updateMember = router.put('/:id', async (req, res) => {
+    console.log('Past here, crashes');
+    let {id} = req.params;
+    if (id) {
+        const member = await Member.findById({id});
+
+        if (member) {
+            const {data} = req.body;
+
+            if (data.name) {
+                const updMember = await Member.findOneAndUpdate({id},{name: data.name});
+
+                if (data.email) {
+                    updMember.email = data.email;
+                }
+                await updMember.save();
+
+                res.status(200).json({message: 'Member updated:', updMember});
+            } else {
+                res.status(400).json({message: 'Please provide the member\'s name'});
+            }
+        } else {
+            res.status(400).json({message: 'User not found'});
+        }
+    } else {
+        res.status(400).json({message: 'Please, provide a valid id'});
+    }
+})
+
 const deleteMember = router.get('/:id/delete', async (req, res) => {
     let {id} = req.params;
     
