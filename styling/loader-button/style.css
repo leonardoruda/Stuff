@@ -2,7 +2,7 @@
     --color-linear: #bd4601;
 }
 
-@keyframes loader {
+@keyframes loader-border {
     0% {
         border-color: transparent transparent #bd4601 transparent;
     }
@@ -17,6 +17,25 @@
     }
 }
 
+@keyframes loader-rotation {
+    0% {
+        transform: rotate(50deg);
+    }
+    35% {
+        transform: rotate(150deg);
+    }
+    70% {
+        transform: rotate(250deg)
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+h2 {
+    text-indent: 20px;
+}
+
 .container {
     height: 100px;
     display: flex;
@@ -27,15 +46,28 @@
     padding: 1rem;
     gap: 5px;
 }
+.container div {
+    margin: 5px;
+}
 
-.box {
+.box1 {
     width: 100px;
     height: 100px;
     margin-bottom: 3rem;
     border-radius: 50%;
     border: 5px solid /*black*/;
     border-color: transparent;
-    animation-duration: 1s;
+    animation-duration: .5s;
+    animation-iteration-count: infinite;
+}
+
+.box2 {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 3em;
+    border-radius: 50px;
+    border: 5px solid transparent;
+    animation-duration: .5s;
     animation-iteration-count: infinite;
 }
 

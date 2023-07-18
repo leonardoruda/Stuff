@@ -7,19 +7,20 @@
     <title>CSS Stuff</title>
 </head>
 <body>
+    <h2>Border floating</h2>
     <div class="container">
-        <button type="submit">Carregar</button>
-        <div class="box"></div>
+        <button class="btn1" type="submit">Carregar</button>
+        <div class="box1"></div>
+    </div>
+    <br>
+    <hr>
+    <h2>Box rotation</h2>
+    <div class="container">
+        <button class="btn2" type="submit">Carregar</button>
+        <div class="box2"></div>
+
     </div>
 
-    <script type="text/javascript">
-        let box = document.querySelector('.box');
-        document.querySelector('button').addEventListener('click', () => {
-            box.style.animationName = 'loader';
-            setTimeout(() => {
-                box.style.animationName = 'none';
-            }, 2750);
-        });
-    </script>
+    <script type="text/javascript" src="index.js"></script>
 </body>
 </html>
