@@ -22,31 +22,19 @@ const addMember = router.post('/', async (req, res) => {
 })
 
 const updateMember = router.put('/:id', async (req, res) => {
-    console.log('Past here, crashes');
     let {id} = req.params;
-    if (id) {
-        const member = await Member.findById({id});
-
-        if (member) {
-            const {data} = req.body;
-
-            if (data.name) {
-                const updMember = await Member.findOneAndUpdate({id},{name: data.name});
-
-                if (data.email) {
-                    updMember.email = data.email;
-                }
-                await updMember.save();
-
-                res.status(200).json({message: 'Member updated:', updMember});
-            } else {
-                res.status(400).json({message: 'Please provide the member\'s name'});
-            }
+    const member = await Member.findById(id);
+    if (member) {
+        const data = req.body;
+        if (!data) {
+            res.status(400).json({message: 'Please provide new values for change'});
         } else {
-            res.status(400).json({message: 'User not found'});
+            const upd = {name:data.name, email:data.email, ...member};
+            await Member.findByIdAndUpdate(id, {name:upd.name, email:upd.email});
+            res.status(200).json({message: 'Member '+data.name+' updated: ', data});
         }
     } else {
-        res.status(400).json({message: 'Please, provide a valid id'});
+        res.status(400).json({message: 'Please provide a valid member id'});
     }
 })
 
