@@ -18,6 +18,7 @@ app.set('view engine', 'handlebars');
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use('/', express.static('./views/layouts'));
 
 app.get('/', async (req, res) => {
     let members = await Member.find({}).lean();

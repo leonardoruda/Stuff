@@ -1,7 +1,3 @@
-{{!-- Precisei colocar o estilo inline e usar bootstrap, pois quando tentava puxar um css local, o DevTools me dizia:
-"Refused to apply style from 'http://127.0.0.1:5000/style.css' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled." 
-Acredito que seja algum problema com as configurações do meu express-handlebars, mas não quis resolver isso agora--}}
-
 <h1 class="bg-primary mb-3 p-5 text-center">{{title}}</h1>
 
 <div class="container">
@@ -19,9 +15,9 @@ Acredito que seja algum problema com as configurações do meu express-handlebar
 <hr>
 
 <div class="container flex justify-content-center">
-    <ul style="columns: 2; list-style-type: none">
+    <ul>
             {{#each members}}
-                <li class="list-group-item" style="display: flex; justify-content:space-between; align-items:center; gap: 10px">{{this.name}} - {{this.email}} <a href="/api/members/{{this._id}}/delete"><button class="btn btn-danger p-1 m-2">Apagar</button></a></li>
+                <li>{{this.name}} - {{this.email}} <a href="/api/members/{{this._id}}/delete"><button class="btn btn-danger p-1 m-2">Apagar</button></a></li>
     
             {{/each}}
     </ul>
