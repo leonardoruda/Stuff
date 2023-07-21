@@ -1,0 +1,149 @@
+//grid gap
+$gap-horizontal: 10px;
+$gap-vertical: $gap-horizontal;
+
+$grid-columns: 12;
+
+:root {
+    --grid-gap: 10px;
+}
+
+//grid definition
+@mixin grid {
+    @supports(grid-area: auto) {
+        display: grid;
+        gap: $gap-horizontal $gap-vertical;
+    }
+}
+
+@mixin gridAuto($min-width) {
+    @supports(grid-area: auto) {
+        grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+    }
+}
+
+@mixin gridLayout($cols...) {
+    @supports(grid-area:auto) {
+        grid-template-columns: repeat($grid-columns, 1fr);
+        
+        $i: 1;
+        @each $col in $cols {
+            > :nth-of-type(#{$i}) {
+                grid-column-end: span nth($col,1);
+                @if length($col) > 1 {
+                    grid-row-end: span nth($col,2);
+                }  
+            }
+            $i: $i + 1;
+        }
+    }
+}
+
+@mixin gridAdvanced($cols...) {
+    @supports(grid-area: auto) {
+        grid-template-columns: repeat($grid-columns, 1fr);
+
+        $i:1;
+        @each $col in $cols {
+            > :nth-of-type(#{$i}) {
+                grid-column-start: nth($col, 1);
+                grid-column-end: nth($col, 2);
+                grid-row-start: nth($col, 3);
+                grid-row-end: nth($col, 4);
+            }
+            $i: $i + 1;
+        }
+    }
+}
+
+
+
+//demo styles (should probably also be in the style.scss, as it is local content definition, after all)
+
+.gallery-grid > div {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &:nth-of-type(3n) {
+        background-color: #d91b1a;
+    }
+    &:nth-of-type(3n+1) {
+        background-color: #3a568c;
+    }
+    &:nth-of-type(3n+2) {
+        background-color: #4f8365;
+    }
+}
+
+.grid-container {
+    font-family: sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+  
+    > div:nth-of-type(1) {
+        background-color: #ead8c2;
+        color: black;
+    }
+    
+    > div:nth-of-type(2) {
+        background-color: #4f8365;
+    }
+    
+    > div:nth-of-type(3) {
+        background-color: #eca414;
+    }
+    
+    > div:nth-of-type(4) {
+        background-color: #3a568c;
+    }
+    > div:nth-of-type(5) {
+        background-color:#d91b1a;
+    }
+    
+    > div:not(:first-of-type) {
+        color: white;
+    }
+    
+    > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.advanced-grid-container {
+    font-family: sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    
+    > div:nth-of-type(1) {
+        background-color: #ead8c2;
+        color: black;
+    }
+    
+    > div:nth-of-type(2) {
+        background-color: #3a568c;
+    }
+    
+    > div:nth-of-type(3) {
+        background-color: #eca414;
+        opacity: .8;
+    }
+
+    > div:nth-of-type(4) {
+        background-color: #d91b1a;
+        opacity: .8;
+    }
+    
+    > div:not(:first-of-type) {
+        color: white;
+    }
+    
+    > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

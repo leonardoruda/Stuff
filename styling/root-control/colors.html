@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colors</title>
+    <link rel="stylesheet" href="../dist/css/style.css">
+</head>
+<body>
+    <h1 class="heading1">Creating your own design system</h1>
+    <nav id="nav">
+        <a href="typography.html">Typography</a>
+        <a href="layout.html">Grid & Layout</a>
+        <a href="colors.html">Colors</a>
+        <a href="spacing.html">Spacing</a>
+        <a href="#">Icons</a>
+        <a href="#">Buttons</a>
+    </nav>
+    <hr>
+    <section class="container colors">
+        <h2>Colors & Theming</h2>
+        <ol>
+            <li>Semantic vs Declarative colors</li>
+            <li>Color Palette</li>
+            <li>Theming</li>
+        </ol>
+        <article>
+            <h3>Semantic vs Declarative</h3>
+            <p>Let's compare both directly in code:</p>
+            <pre>
+                <code>
+                    //Semantic
+                    :root {
+                        --color-primary: #4D84F4;
+                        --color-secondary: #f5414f;
+                    
+                        --color-text: #2e2e31;
+                        --color-border: #d1d0d2;
+                    
+                        --color-success: #88c459;
+                        --color-error: #f5414f;
+                        --color-warning: #ffd137;
+                    }
+
+                    vs
+
+                    //Declarative
+                    :root {
+                        --blue: #4D84F4;
+                        --red-brand: #f5414f;
+                    
+                        --black: #2e2e31;
+                        --gray: #d1d0d2;
+                    
+                        --green: #88c459;
+                        --red: #f94747;
+                        --yellow: #ffd137;
+                    }
+                </code>
+            </pre>
+        </article>
+        <article>
+            <h3>The essential color palette</h3>
+            <ol>
+                <li>The main/primary color → used for the links, the button background color, etc. In general, it's the main call-to-action color.</li>
+                <li>The accent color → used to highlight something important on the page. It shouldn't be a variation of the primary color, but a complementary color.</li>
+                <li>A scale of neutral colors → It's generally a scale of grayscale tones, to be used for text elements, subtle elements, borders, etc.</li>
+                <li>Feedback colors → success, error, warning.</li>
+            </ol>
+            <p>Some of these colors need a variation (darker/lighter version), often used to highlight interactivity (e.g., :hover/:active states).</p>
+            <p>The _colors.scss file becomes the source of truth anytime you need to modify a color. Do you feel the text heading elements should be darker? Open the _colors.scss file and edit the color-text-heading variable.</p>
+            <p>If you define a color-border, for example, then you won't need to look up which gray color you've been using in other components the next time you create a border element. The same concept applies to many elements, not just borders.</p>
+            <h4>Feedback colors</h4>
+            <button class="btn-primary-bg">Button</button>
+            <button class="btn-primary-bg">Button</button>
+            <button class="btn-primary-bg">Button</button>
+            <button class="btn-primary-bg">Button</button>
+        </article>
+        <article>
+            <h3>Theming</h3>
+            <p>Option 1 is updating CSS variables anyway. Browsers that don't support variables will show the “default” color theme. This is not an issue, as long as the content is accessible.
+            <br>
+            For example, you have a default color theme → white background and black text color, and a .theme-dark → black background and white text color. Then you create two components, one with the default theme, the other with the .dark-theme. If having both components with the default theme does not affect the user experience, then you can consider the .dark-theme as an enhancement (optional). In this case, it makes sense to update the variables to create different themes even if they're not supported everywhere.</p>
+            <pre>
+                <code>
+                    @supports(--css: variables) {  
+                        .theme--dark {
+                            --component-background: var(--black);
+                            --color-border: var(--gray-6);
+                            --color-text: var(--gray-4);
+                            --color-text-heading: var(--white);
+                        }
+                    }
+                </code>
+            </pre>
+            <p>Option 2 would be targeting all elements whose appearance is affected by the theme. The advantage of this method is that it's supported by all browsers. However, it's not as easy to maintain compared to the one based entirely on CSS variables.</p>
+            <pre>
+                <code>
+                    .theme--dark {
+                        color: var(--gray-1);
+                    
+                        h1, h2, h3, h4 {
+                            color: var(--white);
+                        }
+                    
+                        .text--subtle {
+                            color: var(--gray-4);
+                        }
+                    
+                        a {
+                            color: var(--color-accent);
+                        }
+                    }
+                </code>
+            </pre>
+        </article>
+    </section>
+</body>
+</html>

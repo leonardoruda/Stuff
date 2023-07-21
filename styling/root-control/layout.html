@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout</title>
+    <link rel="stylesheet" href="../dist/css/style.css">
+</head>
+<body>
+    <h1 class="heading1">Creating your own design system</h1>
+    <nav id="nav">
+        <a href="typography.html">Typography</a>
+        <a href="layout.html">Grid & Layout</a>
+        <a href="colors.html">Colors</a>
+        <a href="spacing.html">Spacing</a>
+        <a href="#">Icons</a>
+        <a href="#">Buttons</a>
+    </nav>
+    <hr>
+    <section class="container layout">
+        <h2>Grid & Layout</h2>
+        <ol>
+            <li>Auto-generated nº of columns with CSS Grid</li>
+            <li>One-dimensional layout - using Flexbox</li>
+            <li>Two-dimensional layout - using CSS Grid</li>
+            <li>Two-dimensional layout with overlapping elements - using CSS Grid</li>
+        </ol>
+
+        <article>
+            <h3>Layout with an auto-generated number of columns</h3>
+            <p>As an example, let's use a gallery of products, each with the same width, with a minimun width and items-per-row acconrding to media queries.</p>
+            <pre>
+                <code>
+                    $gap-horizontal: 10px;
+                    $gap-vertical: $gap-horizontal;
+
+                    @mixin grid {
+                        @supports(grid-area: auto) {
+                            display: grid;
+                            grid-columns-gap: $gap-horizontal;
+                            grid-row-gap: $gap-vertical;
+                        }
+                    }
+                </code>
+            </pre>
+            <p>The @supports rule is used to target browsers that support the Grid (leaving out also the browsers that support the old CSS Grid specification, like IE 11).</p>
+            <p>After initializing the grid container, we can define the mixin that creates the gallery:</p>
+            <pre>
+                <code>
+                    @mixin gridAuto($min-width) {
+                        @supports(grid-area: auto) {
+                            grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+                        }
+                    }
+
+                    .gallery-grid {
+                        @include grid;
+                        @include gridAuto(260px);
+                    }
+                </code>
+            </pre>
+            <p>Let's see the example in practice:</p>
+            <div class="gallery-grid">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+                <div>7</div>
+                <div>8</div>
+                <div>9</div>
+                <div>10</div>
+                <div>11</div>
+                <div>12</div>
+                <div>13</div>
+                <div>14</div>
+                <div>15</div>
+              </div>
+        </article>
+        <article>
+            <h3>One-dimensional layout</h3>
+            <p>Arranging in columns, while customizing the items width and distributing the space among them equally. Using flexbox and utility classes.</p>
+            <p>Trust me, don't bother! If really wanted, check<a href="https://medium.com/codyhouse/create-your-design-system-part-2-grid-layout-aa961d59b8d6"><strong>the original article</strong></a></p>
+        </article>
+        <hr>
+        <article>
+            <h3>Two-dimensional layout</h3>
+            <p>In layout 2, we considered the case where we needed to control the width of the elements in our row. We didn't consider the height of the elements at all.
+            <br>
+            If we want to create a two-dimensional layout where we can control the height of our elements as well, then CSS Grid is probably the best solution.</p>
+            <p>We'll use a mixin that receives in its parameters a pair of numbers for each element in the grid; the 1st defines the nº of columns that element will occupy, and the 2nd the nº of rows.</p>
+            <pre>
+                <code>
+                    .grid {
+                        @include grid;
+
+                        @include gridLayout(
+                          (7, 2), //item 1
+                          (5, 1), //item 2
+                          (5, 1), //item 3
+                          (12, 1) //item 4
+                        );
+                      }
+                </code>
+            </pre>
+            <p>In the code above, we are saying: the first element in the layout has to take up 7 columns and 2 rows; the second element 5 columns and 1 row; the same for the third element; the last one 12 columns (100% width) and 1 row. Let's look at the mixin:</p>
+            <pre>
+                <code>
+                    @mixin gridLayout($cols...) {
+                        @supports(grid-area: auto) {
+                          grid-template-columns: repeat($grid-columns, 1fr);
+                      
+                          $i: 1;
+                          @each $col in $cols {
+                            > :nth-of-type(#{$i}) {
+                              grid-column-end: span nth($col,1);
+                              @if length($col) > 1 {
+                                grid-row-end: span nth($col,2);
+                              }
+                            }
+                            $i: $i + 1;
+                          }
+                        }
+                      }
+                </code>
+            </pre>
+            <p>First, the grid-template-columns define a template with the $columns number, all with the same width. Notice that the grid-template-rows wasn't defined, so the content will determine the row's height, but you can fixate a given height to it (we'll use grid-auto-rows: 120px).</p>
+            <p>The 'each' loop is where the items are allocated: for each one of the pairs passed to the mixin, we take the corresponding element (using the :nth-of-type selector) and place it in our grid (using the span keyword).</p>
+            <p><strong>Note</strong>: the second number in each pair is not required (in the mixin, we check if the second value is passed before setting the grid-row-end property).
+            Passing just one number per item will allow you to create a one-dimensional layout; this is an alternative to the method described in section 2 (Flexbox + utility classes).</p>
+
+            <div class="grid-container">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+            </div>
+        </article>
+        <h3>Two-dimensional layout with overlapping elements</h3>
+        <p>If you want to create a two-dimensional layout (as with case 3 where you can set both width and height of your items) but you want to control the start/end position of your elements as well (so that they can overlap).</p>
+        <p>This time, we'll need to pass, for each element in our layout, four numbers: the first two are the item's start and end position within the grid columns, while the last two the row start and end position.</p>
+        <pre>
+            <code>
+                .grid {
+                    @include gridAdvanced(
+                        (1,8,1,3), //item 1
+                        (1,8,3,5), //item 2
+                        (5,-1,2,4) //item 3
+                    )
+                }
+            </code>
+        </pre>
+        <p>In the example above, we have 3 elements: the first one starts at column 1 and ends at column 8 (which means, it takes up 7 columns in our layout -> remember column 8 marks the end of the element, so it is not included) and starts at row 1 and ends at row 3 (2 rows); the second one takes the same columns but it starts at row 3 and ends at row 5 (2 rows); the third one starts at column 5 and takes up all the remaining columns (-1 means go till column 12 but include it as well) and starts at row 2 and ends at row 4 (2 rows).</p>
+        Here's the mixin:
+        <pre>
+            <code>
+                @mixin gridAdvanced($cols...) {
+                    @supports(grid-area: auto) {
+                      grid-template-columns: repeat($grid-columns, 1fr);
+                  
+                      $i: 1;
+                      @each $col in $cols {
+                        > :nth-of-type(#{$i}) {
+                          grid-column-start: nth($col,1);
+                          grid-column-end: nth($col,2);
+                          grid-row-start: nth($col,3);
+                          grid-row-end: nth($col,4);
+                        }
+                        $i: $i + 1;
+                      }
+                    }
+                  }
+            </code>
+        </pre>
+        Let's see it in action:
+        <div class="advanced-grid-container">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+        </div>
+    </section>
+    <a href="#nav"><button>Go back</button></a>
+</body>
+</html>

@@ -1,0 +1,44 @@
+:root {
+    /* spacing values */
+    --space-xxxs: 0.25em;
+    --space-xxs:  0.375em;
+    --space-xs:   0.5em;
+    --space-sm:   0.75em;
+    --space-md:   1.25em;
+    --space-lg:   2em;
+    --space-xl:   3.25em;
+    --space-xxl:  5.25em;
+    --space-xxxl: 8.5em;
+}
+
+//create utility classes quickly
+$margins: (0.25, 0.5, 0.75, 1.25, 2, 3.25, 5.25);
+$i:1;
+
+@each $margin in $margins {
+    .m-#{$margin} {
+        margin: #{$margin}em;
+    }
+    .mx-#{$margin} {
+        margin: 0 #{$margin}em 0;
+    }
+    .my-#{$margin} {
+        margin: #{$margin}em 0;
+    }
+}
+
+h1, h2, h3, h4, form legend {
+    margin-bottom: var(--space-xxs);
+    line-height: var(--heading-line-height);
+}
+
+// The reason why margins of lists and paragraphs descend from the .text-container class is to separate blocks of text from all the other places where a paragraph or an unordered list can be used. Optionally, you can target the <article> element.
+.text-container {
+    h2, h3, h4 {
+        margin-top: var(--space-sm);
+    }
+    
+    ul, ol, p {
+        margin-bottom: var(--space-md);
+    }
+}

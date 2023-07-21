@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../dist/css/style.css">
+    <title>Design System</title>
+</head>
+<body>
+    <h1 class="heading1">Creating your own design system</h1>
+    <nav>
+        <a href="typography.html">Typography</a>
+        <a href="layout.html">Grid & Layout</a>
+        <a href="colors.html">Colors</a>
+        <a href="spacing.html">Spacing</a>
+        <a href="#">Icons</a>
+        <a href="#">Buttons</a>
+    </nav>
+    <hr>
+    <section class="container typography">
+        <h2>Typography</h2>
+        <ol>
+            <li>Typeface (font-family)</li>
+            <li>Type (modular) scale</li>
+            <li>Responsiveness of the text (size unit and breakpoints)</li>
+            <li>Spacing and vertical rhytm</li>
+            <li>Colors (theming)</li>
+        </ol>
+        <article>
+            <h3>--text-base-size & --text-scale-ratio</h3>
+            <pre>
+                <code>
+                    --text-base-size: 1em;
+                    --text-scale-ratio: 1.2;
+
+                    --text-sm: calc(var(--text-scale-ratio));
+                    --text-md: calc(var(--text-scale-ratio) * var(--text-scale-ratio));
+                    --text-lg: calc(var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+                </code>
+            </pre>
+            <p>Use em units and a modular scale, so that a local change (eg: text-base-size variable in a specific media query) doesn't affect the font-size of the body and hence, the whole typography. 
+            </p>
+            <pre>
+                <code>
+                    @include breakpoint(md) {
+                        :root {
+                            --text-base-size: 1.25em;
+                            --text-scale-ratio: 1.25;
+                        }
+                    }
+                </code>
+            </pre>
+            <p>By editing only two variables, you can manage the size of all your text elements, and the em unit manages margins, paddings and spacing in general!</p>
+        </article>
+        
+        <article>
+            <h3>--baseline & --space-x</h3>
+            <p>Since we use the em unit for the font-size, we should set spacing in px or rem values if we want to preserve vertical rhythm (otherwise spacing would be affected by the em unit of the font size). As a result, if we change the font-size of the <em>h1</em>, we may want to tweak the margin-bottom as well (e.g., set a media query and increase the margin-bottom to — space-xl); otherwise the margin could look too small now that the <em>h1</em> is bigger than before.</p>
+            <pre>
+                <code>
+                    :root {
+                        /* spacing values */
+                        --space-xs:   0.5em;
+                        --space-sm:   0.75em;
+                        --space-md:   1.25em;
+                        --space-lg:   2em;
+                        --space-xl:   3.25em;
+                    }
+                </code>
+            </pre>
+            <p>But if you set your margins in em as well, chances are you won't need to edit them at all, as they will change accordingly to the new font-size reassigned to a local component!</p>
+
+            <h3>Editing text size and spacing on a component level</h3>
+            <p>The system we're exploring makes sense as long as all text elements change accordingly with the two main text variables ( — text-base-size and — text-scale-ratio). How do we edit text size on a component level?</p>
+            <pre>
+                <code>
+                    .component h1 {
+                        font-size: calc(var(--text-xxl) - 0.8em);
+                        font-size: var(--text-xl);
+                    }
+                </code>
+            </pre>
+            <p>The 2nd option if preferable, as the new value still belongs to the type scale, thus maintaining control.</p>
+        </article>
+
+        <article>
+            <h3>Colors</h3>
+            <p>Updating a CSS Variable using a class is not supported in all modern browser (and gulp plugins). For the time being, we need to change the variable entirely!</p>
+            <pre>
+                <code>
+                    :root {
+                        [...]
+                    }
+
+                    // not supported yet, but soon!
+                    theme--dark {
+                        --color-text: var(--gray-1);
+                        --color-text-heading: var(--white);
+                        --color-text-subtle: var(--gray-4);
+                        --color-link: var(--color-accent);
+                    }
+                    
+                    // what we can do for now
+                    .theme--dark {
+                        color: var(--gray-1);
+                    
+                        h1, h2, h3, h4 {
+                            color: var(--white);
+                        }
+                    
+                        .text--subtle {
+                            color: var(--gray-4);
+                        }
+                    
+                        a {
+                            color: var(--color-accent);
+                        }
+                    }
+                </code>
+            </pre>
+        </article>
+    </section>
+</body>
+</html>

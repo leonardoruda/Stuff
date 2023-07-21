@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spacing</title>
+    <link rel="stylesheet" href="../dist/css/style.css">
+</head>
+<body>
+    <h1 class="heading1">Creating your own design system</h1>
+    <nav id="nav">
+        <a href="typography.html">Typography</a>
+        <a href="layout.html">Grid & Layout</a>
+        <a href="colors.html">Colors</a>
+        <a href="spacing.html">Spacing</a>
+        <a href="#">Icons</a>
+        <a href="#">Buttons</a>
+    </nav>
+    <hr>
+    <section class="container spacing">
+        <h2>Spacing</h2>
+        <p>The same principles of modular scaling we applied on typography are also used here. We use a base-size, and extrac from it multiple types of its multiples:</p>
+        <pre>
+            <code>
+                :root {
+                    --space-unit: 1em;
+                    --space-xxs: calc(0.25 * var(--space-unit));
+                    --space-xs: calc(0.5 * var(--space-unit));
+                    --space-sm: calc(0.75 * var(--space-unit));
+                    --space-md: calc(1.25 * var(--space-unit));
+                    --space-lg: calc(2 * var(--space-unit));
+                    --space-xl: calc(3.25 * var(--space-unit));
+                    --space-xxl: calc(5.25 * var(--space-unit));
+                }
+            </code>
+        </pre>
+        <p>The text-base-size variable is the controller of the whole type system. If you increase the text-base-size at a specific media query, all the text size variables change accordingly. Since the spacing unit is equal to 1em, and all other spacing values are multipliers of the unit value, when we update the text-base-size variable, we affect the spacing as well.</p>
+        <p>No additional media queries needed so far! All you have to do to take advantage of this powerful approach to responsiveness is using the spacing variables to set paddings and margins on a component level.</p>
+        <p>With media queries, you can change the everything by changing the text-base-size, or, if you want to change just the spacing, simply change the --space-unit variable!</p>
+
+        <h3>Setting default padding for all components</h3>
+        <p>There will be cases where you need different components to have the same padding. Setting a variable for the default padding of the components is a trick I've learned after a lot of time spent looking for a padding value hidden somewhere in my CSS files.</p>
+        <pre>
+            <code>
+                :root {
+                    [...]
+
+                    /* components padding */
+                    --component-padding: var(--space-sm);
+                }
+
+                .component {
+                    padding-top: var(--component-padding);
+                }
+            </code>
+        </pre>
+        <p>If you need to apply padding to a component, you don't need to check which spacing variable has been used in other similar cases. Just use the component-padding variable.</p>
+
+        <h3>Margin utility classes</h3>
+        <p>While it's safe to include padding directly in your component CSS, including margins can cause layout issues. Once again, we're referring to the main components, those blocks that define your main layout (not a &ltbutton> component, but a &ltsection class=”myComponent”&gt element).</p>
+        <p>If we imagine these components as blocks distributed in layouts, then information about margins and position should be stored in the abstract layout element, not the component. For example, you may end up using the same component in two different layouts, in one case you need to apply a margin-bottom, in another you don't. You can see why including the margin-bottom in the component CSS may not be a good idea in this case.</p>
+        <pre>
+            <code>
+                //create utility classes quickly
+                $margins: (0.25, 0.5, 0.75, 1.25, 2, 3.25, 5.25);
+                $i:1;
+
+                @each $margin in $margins {
+                    .m-#{$margin} {
+                        margin: #{$margin}em;
+                    }
+                    .mx-#{$margin} {
+                        margin: 0 #{$margin}em 0;
+                    }
+                    .my-#{$margin} {
+                        margin: #{$margin}em 0;
+                    }
+                }
+            </code>
+        </pre>
+        <h3>Fixed spacing values</h3>
+    </section>
+</body>
+</html>

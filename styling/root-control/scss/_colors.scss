@@ -1,0 +1,101 @@
+@function tint($color, $percentage) {
+    @return mix(white, $color, $percentage);
+}
+@function shade($color, $percentage) {
+    @return mix(black, $color, $percentage);
+}
+
+:root {
+    /* main colors */
+    --color-primary: #4a7de2;
+    --color-primary-light: tint(var(--color-primary), 15%);
+    --color-primary-dark: shade(var(--color-primary), 15%);
+    --color-primary-bg: var(--color-primary) alpha(20%);
+
+    --color-accent: #f13a49;
+    --color-accent-light: var(--color-accent) tint(15%);
+    --color-accent-dark: var(--color-accent) shade(10%);
+    --color-accent-bg: var(--color-accent) alpha(20%);
+
+    // shades - generated using chroma.js - 12 steps
+    --black: #1d1d21;
+    --gray-10: #2e2e31;
+    --gray-8: #515157;
+    --gray-6: #7b7a7d;
+    --gray-4: #a5a5a6;
+    --gray-3: #bbbbbc;
+    --gray-2: #d1d0d2;
+    --gray-1: #e8e7e8;
+    --white: white;
+
+    /* feedback */
+    --color-success: #74aa4a;
+    --color-error: #d4414e;
+    --color-warning: #e4bc3a;
+}
+
+:root {
+    /* typography */
+    --color-text: var(--gray-10);
+    --color-text-heading: var(--black);
+    --color-text-subtle: var(--gray-6);
+    --color-link: var(--color-primary);
+    --color-link-visited: var(--color-primary-dark);
+    --color-mark: var(--color-accent-bg);
+    --color-blockquote-border: var(--gray-2);
+
+    /* border */
+    --color-border: var(--gray-2);
+
+    /* body */
+    --color-body: var(--white);
+
+    /* forms */
+    --form-element-border: var(--color-border);
+    --form-element-border-focus: var(--color-primary);
+    --form-element-border-error: var(--color-error);
+    --form-element-bg: var(--white);
+    --form-text-placeholder: var(--gray-4);
+
+    /* buttons */
+    --btn-primary-bg: var(--color-primary);
+    --btn-primary-hover: var(--color-primary-light);
+    --btn-primary-active: var(--color-primary-dark);
+    --btn-primary-label: var(--white);
+
+    /* icons */
+    --color-icon-primary: var(--gray-4);
+    --color-icon-secondary: inherit;
+}
+
+
+body {
+    background-color: var(--color-body);
+    color: var(--color-text);
+}
+
+h1, h2, h3, h4, form legend {
+    color: var(--color-text-heading);
+}
+
+a {
+    color: var(--color-link);
+
+    &:visited {
+        color: var(--color-link-visited);
+    }
+}
+
+button {
+    padding: .75em;
+    margin: .75em;
+    border-radius: 5px;
+    background-color: var(--btn-primary-bg);
+
+    &:hover {
+        background-color: var(--btn-primary-hover);
+    }
+    &:active {
+        background-color: var(--btn-primary-active);
+    }
+}

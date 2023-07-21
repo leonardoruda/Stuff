@@ -1,0 +1,58 @@
+@import 'typography';
+@import 'spacing';
+@import 'colors';
+@import 'layout';
+
+nav {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+a {
+    margin: var(--space-md) var(--space-sm) 0;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+        transform: scale(1.1);
+    }
+}
+
+.heading1 {
+    margin-bottom: 0;
+}
+
+.gallery-grid {
+    @include grid;
+    @include gridAuto(260px);
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.grid-container {
+    @include grid;
+    grid-auto-rows: 120px;
+
+    @media only screen and (min-width: 600px) {
+        @include gridLayout(
+            (7, 2), 
+            (5, 1), 
+            (2),
+            (3),
+            (12, 1)
+        );
+    }
+}
+
+.advanced-grid-container {
+    @include grid;
+    grid-auto-rows: 90px;
+
+    @media only screen and (min-width: 600px) {
+        @include gridAdvanced(
+            (1, 8, 1, 3),
+            (1, 8, 3, 5), 
+            (5, -1, 2, 4),
+            (10, 12, 1, 5)
+        );
+    }
+}
