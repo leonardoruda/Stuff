@@ -1,21 +1,15 @@
-@function tint($color, $percentage) {
-    @return mix(white, $color, $percentage);
-}
-@function shade($color, $percentage) {
-    @return mix(black, $color, $percentage);
-}
-
+// ref= https://codyhouse.co/ds/globals/colors
 :root {
     /* main colors */
-    --color-primary: #4a7de2;
-    --color-primary-light: tint(var(--color-primary), 15%);
-    --color-primary-dark: shade(var(--color-primary), 15%);
-    --color-primary-bg: var(--color-primary) alpha(20%);
+    --color-primary: #4b7de2;
+    --color-primary-light: hsl(220, 72%, 65%);
+    --color-primary-dark: hsl(220, 72%, 53%);
+    --color-primary-bg: hsla(220, 72%, 59%, 0.2);
 
-    --color-accent: #f13a49;
-    --color-accent-light: var(--color-accent) tint(15%);
-    --color-accent-dark: var(--color-accent) shade(10%);
-    --color-accent-bg: var(--color-accent) alpha(20%);
+    --color-accent: hsl(27, 80%, 57%);
+    --color-accent-light: hsl(27, 80%, 63%);
+    --color-accent-dark: hsl(27, 80%, 51%);
+    --color-accent-bg: hsla(27, 80%, 57%, 0.2);
 
     // shades - generated using chroma.js - 12 steps
     --black: #1d1d21;
@@ -32,9 +26,7 @@
     --color-success: #74aa4a;
     --color-error: #d4414e;
     --color-warning: #e4bc3a;
-}
 
-:root {
     /* typography */
     --color-text: var(--gray-10);
     --color-text-heading: var(--black);
@@ -63,6 +55,18 @@
     --btn-primary-active: var(--color-primary-dark);
     --btn-primary-label: var(--white);
 
+    --btn-secondary-bg: var(--gray-1);
+    --btn-secondary-active: var(--gray-2);
+    --btn-secondary-label: var(--gray-10);
+
+    --btn-accent-bg: var(--color-accent);
+    --btn-accent-hover: var(--color-accent-light);
+    --btn-accent-active: var(--color-accent-dark);
+    --btn-accent-label: var(--white);
+
+    --btn-disabled-bg: var(--gray-2);
+    --btn-disabled-label: var(--gray-10);
+
     /* icons */
     --color-icon-primary: var(--gray-4);
     --color-icon-secondary: inherit;
@@ -83,19 +87,5 @@ a {
 
     &:visited {
         color: var(--color-link-visited);
-    }
-}
-
-button {
-    padding: .75em;
-    margin: .75em;
-    border-radius: 5px;
-    background-color: var(--btn-primary-bg);
-
-    &:hover {
-        background-color: var(--btn-primary-hover);
-    }
-    &:active {
-        background-color: var(--btn-primary-active);
     }
 }

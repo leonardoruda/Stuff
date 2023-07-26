@@ -11,13 +11,13 @@ Typography
     --text-scale-ratio: 1.2;
 
     /* type scale */
-    --text-xs: calc(1em / (var(--text-scale-ratio) * var(--text-scale-ratio)));
+    --text-xxs: .5em;
+    --text-xs: calc(1em / var(--text-scale-ratio) / var(--text-scale-ratio));
     --text-sm: calc(1em / var(--text-scale-ratio));
     --text-md: calc(1em * var(--text-scale-ratio));
     --text-lg: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio));
     --text-xl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
     --text-xxl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
-    --text-xxxl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
 
     /* line-height */
     --heading-line-height: 1.2;
@@ -39,36 +39,35 @@ body {
 
 h1, h2, h3, h4, form legend {
     color: var(--color-text-heading);
-    margin-bottom: var(--space-xxs);
     line-height: var(--heading-line-height);
 }
 
 /* text size */
-.text--xxxl {
+.text-xxxl {
     font-size: var(--text-xxxl);
 }
 
-h1, .text--xxl {
+h1, .text-xxl {
     font-size: var(--text-xxl);
 }
 
-h2, .text--xl {
+h2, .text-xl {
     font-size: var(--text-xl);
 }
 
-h3, .text--lg {
+h3, .text-lg {
     font-size: var(--text-lg);
 }
 
-h4, .text--md {
+h4, .text-md {
     font-size: var(--text-md);
 }
 
-.text--sm, small {
+.text-sm, small {
     font-size: var(--text-sm);
 }
 
-.text--xs {
+.text-xs {
     font-size: var(--text-xs);
 }
 
@@ -89,14 +88,6 @@ b, strong {
 }
 
 .text-container {
-    h2, h3, h4 {
-        margin-top: var(--space-sm);
-    }
-    
-    ul, ol, p {
-        margin-bottom: var(--space-md);
-    }
-
     ul, ol {
 		list-style-position: outside;
         padding-left: 24px;

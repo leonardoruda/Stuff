@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buttons!</title>
+    <link rel="stylesheet" href="../dist/css/style.css">
+</head>
+<body>
+    <h1 class="heading1">Creating your own design system</h1>
+    <nav id="nav">
+        <a href="typography.html">Typography</a>
+        <a href="layout.html">Grid & Layout</a>
+        <a href="colors.html">Colors</a>
+        <a href="spacing.html">Spacing</a>
+        <a href="#">Icons</a>
+        <a href="buttons.html">Buttons</a>
+    </nav>
+    <hr>
+    <button class="btn-primary">Button</button>
+    <button class="btn-accent">Button</button>
+    <button disabled class="btn">Button</button>
+    <button class="btn-success">Button</button>
+    <button class="btn-warning">Button</button>
+    <button class="btn-error">Button</button>
+    <button class="btn">Button</button>
+    <section>
+        <h2>Setting the basic button style</h2>
+        <pre>
+            <code>
+                :root {
+                    --btn-font-size: 1em;
+                    --btn-radius: 0.25em;
+                }
+                
+                .btn {
+                    display: inline-flex;
+                    position: relative;
+                    white-space: nowrap;
+                    text-decoration: none;
+                    line-height: 1;
+                
+                    padding: var(--space-xs) var(--space-sm);
+                    border-radius: var(--btn-radius);
+                    font-size: var(--btn-font-size);
+                    color: var(--color-link);
+                }
+            </code>
+        </pre>
+        <p>The basic style includes those properties that you don't plan on overwriting while creating button variations later on, as well as reset style to prevent common style issues. For example:
+        <li>position: relative; is used in case you want to create interactive icons where an icon replaces the text label.</li>
+        <li>white-space: nowrap; prevents the text label from wrapping to the next line.</li>
+        <li>text-decoration: none; removes the text decoration in case you're applying the .btn class to a link.</li> <br>
+        Abstracting the font-size and border radius is particularly helpful in the early stages of creating a design system, when changes are frequent. Padding values are defined according to our spacing system, so that they are automatically responsive.</p>
+        <h3>Style variations</h3>
+        <ul>
+            <li>.btn--primary → the main call-to-action button style.</li>
+            <li>.btn--secondary → a subtle style version, used for secondary actions or in combo with the primary/accent button.</li>
+            <li>.btn--accent → used to draw particular attention to the button (e.g., destructive actions).</li>
+            <li>.btn[disabled] → used for feedback, to identify a button that is disabled.</li>
+        </ul>
+    </section>
+</body>
+</html>

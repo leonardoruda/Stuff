@@ -14,9 +14,12 @@
         <a href="colors.html">Colors</a>
         <a href="spacing.html">Spacing</a>
         <a href="#">Icons</a>
-        <a href="#">Buttons</a>
+        <a href="buttons.html">Buttons</a>
     </nav>
     <hr>
+    <div class="m-xs test">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores necessitatibus nihil vitae, nulla incidunt deleniti?
+    </div>
     <section class="container spacing">
         <h2>Spacing</h2>
         <p>The same principles of modular scaling we applied on typography are also used here. We use a base-size, and extrac from it multiple types of its multiples:</p>
@@ -36,7 +39,7 @@
         </pre>
         <p>The text-base-size variable is the controller of the whole type system. If you increase the text-base-size at a specific media query, all the text size variables change accordingly. Since the spacing unit is equal to 1em, and all other spacing values are multipliers of the unit value, when we update the text-base-size variable, we affect the spacing as well.</p>
         <p>No additional media queries needed so far! All you have to do to take advantage of this powerful approach to responsiveness is using the spacing variables to set paddings and margins on a component level.</p>
-        <p>With media queries, you can change the everything by changing the text-base-size, or, if you want to change just the spacing, simply change the --space-unit variable!</p>
+        <p>With media queries, you can change everything by just changing the text-base-size, or, if you want to change just the spacing, simply change the --space-unit variable!</p>
 
         <h3>Setting default padding for all components</h3>
         <p>There will be cases where you need different components to have the same padding. Setting a variable for the default padding of the components is a trick I've learned after a lot of time spent looking for a padding value hidden somewhere in my CSS files.</p>
@@ -62,23 +65,36 @@
         <pre>
             <code>
                 //create utility classes quickly
-                $margins: (0.25, 0.5, 0.75, 1.25, 2, 3.25, 5.25);
-                $i:1;
+                $pairs: (
+                    (xs, calc(1em / (var(--text-scale-ratio) * var(--text-scale-ratio)))),
+                    (sm, calc(1em / var(--text-scale-ratio))),
+                    (md, calc(1em * var(--text-scale-ratio))),
+                    (lg, calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio))),
+                    (xl, calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio))),
+                    (xxl, calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio)))
+                );
 
                 @each $margin in $margins {
-                    .m-#{$margin} {
-                        margin: #{$margin}em;
+                    $key: nth($pair, 1);
+                    $value: nth($pair, 2);
+                    .m-#{$key} {
+                        margin: #{$value}em;
                     }
-                    .mx-#{$margin} {
-                        margin: 0 #{$margin}em 0;
+                    .mx-#{$key} {
+                        margin: 0 #{$value}em 0;
                     }
-                    .my-#{$margin} {
-                        margin: #{$margin}em 0;
+                    .my-#{$key} {
+                        margin: #{$value}em 0;
                     }
                 }
             </code>
         </pre>
+        <p>Note that we're using the same process and scale as the fonts, thus creating margin classes for each of the sizes and still controlling everything with just one variable!</p>
+        <h3>Custom spacing values</h3>
+        <p>If none of the fixed spaces looks good, but you don't want to break up the system, use calc(var(--space-md) * 1.1), for example!</p>
         <h3>Fixed spacing values</h3>
+        <p>When an element must be at a fixed size, regardless of its content-size, just set the margins with rem! Ideally, you'd want to create a complete scaling system for the rem units, just recapitulating the one we used with ems.</p>
     </section>
+    <a href="#nav"><button class="btn-warning">Go back</button></a>
 </body>
 </html>

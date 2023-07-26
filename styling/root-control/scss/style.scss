@@ -2,6 +2,7 @@
 @import 'spacing';
 @import 'colors';
 @import 'layout';
+@import 'buttons';
 
 nav {
     display: flex;
@@ -55,4 +56,10 @@ a {
             (10, 12, 1, 5)
         );
     }
+}
+
+.test {
+    font-size: var(--text-sm);
+    border: 1px solid black;
+    padding: var(--component-padding);
 }

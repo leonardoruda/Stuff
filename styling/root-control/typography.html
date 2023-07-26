@@ -8,13 +8,13 @@
 </head>
 <body>
     <h1 class="heading1">Creating your own design system</h1>
-    <nav>
+    <nav id="nav">
         <a href="typography.html">Typography</a>
         <a href="layout.html">Grid & Layout</a>
         <a href="colors.html">Colors</a>
         <a href="spacing.html">Spacing</a>
         <a href="#">Icons</a>
-        <a href="#">Buttons</a>
+        <a href="buttons.html">Buttons</a>
     </nav>
     <hr>
     <section class="container typography">
@@ -55,7 +55,7 @@
         
         <article>
             <h3>--baseline & --space-x</h3>
-            <p>Since we use the em unit for the font-size, we should set spacing in px or rem values if we want to preserve vertical rhythm (otherwise spacing would be affected by the em unit of the font size). As a result, if we change the font-size of the <em>h1</em>, we may want to tweak the margin-bottom as well (e.g., set a media query and increase the margin-bottom to — space-xl); otherwise the margin could look too small now that the <em>h1</em> is bigger than before.</p>
+            <p>Since we use the em unit for the font-size, we should set spacing in px or rem values if we want to preserve vertical rhythm (otherwise spacing would be affected by the em unit of the font size). As a result, if we change the font-size of the &lt;h1>, we may want to tweak the margin-bottom as well (e.g., set a media query and increase the margin-bottom to — space-xl); otherwise the margin could look too small now that the &lt;h1> is bigger than before.</p>
             <pre>
                 <code>
                     :root {
@@ -68,7 +68,7 @@
                     }
                 </code>
             </pre>
-            <p>But if you set your margins in em as well, chances are you won't need to edit them at all, as they will change accordingly to the new font-size reassigned to a local component!</p>
+            <p>But if you set your margins in em as well, chances are you won't need to edit them at all, as they will change accordingly to the new font-size reassigned to a local component! See the spacing section for further details.</p>
 
             <h3>Editing text size and spacing on a component level</h3>
             <p>The system we're exploring makes sense as long as all text elements change accordingly with the two main text variables ( — text-base-size and — text-scale-ratio). How do we edit text size on a component level?</p>
@@ -120,5 +120,6 @@
             </pre>
         </article>
     </section>
+    <a href="#nav"><button class="btn-warning">Go back</button></a>
 </body>
 </html>
