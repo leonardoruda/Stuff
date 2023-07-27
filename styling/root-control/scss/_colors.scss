@@ -1,15 +1,31 @@
 // ref= https://codyhouse.co/ds/globals/colors
+@function tint($color, $percentage) {
+    @return mix(white, $color, $percentage);
+}
+@function shade($color, $percentage) {
+    @return mix(black, $color, $percentage);
+}
+@function alpha($color, $percentage) {
+    @return change-color($color, $alpha: $percentage);
+}
+
+$variables: (
+    color-primary: #4b7de2,
+    color-primary-light: tint(#4b7de2, 15%),
+    color-primary-dark: shade(#4b7de2, 15%),
+    color-primary-bg: alpha(#4b7de2, .5),
+    color-accent: #e9893a,
+    color-accent-light: tint(#e9893a, 15%),
+    color-accent-dark: shade(#e9893a, 15%),
+    color-accent-bg: alpha(#e9893a, .5)
+);
+
+
 :root {
     /* main colors */
-    --color-primary: #4b7de2;
-    --color-primary-light: hsl(220, 72%, 65%);
-    --color-primary-dark: hsl(220, 72%, 53%);
-    --color-primary-bg: hsla(220, 72%, 59%, 0.2);
-
-    --color-accent: hsl(27, 80%, 57%);
-    --color-accent-light: hsl(27, 80%, 63%);
-    --color-accent-dark: hsl(27, 80%, 51%);
-    --color-accent-bg: hsla(27, 80%, 57%, 0.2);
+    @each $property, $value in $variables {
+        --#{$property}: #{$value};
+    }
 
     // shades - generated using chroma.js - 12 steps
     --black: #1d1d21;
@@ -87,5 +103,6 @@ a {
 
     &:visited {
         color: var(--color-link-visited);
+        font-weight: bolder;
     }
 }

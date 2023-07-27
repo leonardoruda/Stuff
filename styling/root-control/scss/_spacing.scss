@@ -1,14 +1,20 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 :root {
     /* spacing values */
     --space-unit: 1em;
 
-    --space-xxs: var(--text-xxs);
-    --space-xs: var(--text-xs);
-    --space-sm: var(--text-sm);
-    --space-md: var(--text-md);
-    --space-lg: var(--text-lg);
-    --space-xl: var(--text-xl);
-    --space-xxl: var(--text-xxl);
+    --space-xxs: .5em;
+    --space-xs: calc(var(--space-unit) / var(--text-scale-ratio) / var(--text-scale-ratio));
+    --space-sm: calc(var(--space-unit) / var(--text-scale-ratio));
+    --space-md: calc(var(--space-unit) * var(--text-scale-ratio));
+    --space-lg: calc(var(--space-unit) * var(--text-scale-ratio) * var(--text-scale-ratio));
+    --space-xl: calc(var(--space-unit) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+    --space-xxl: calc(var(--space-unit) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
 
     // components padding
     --component-padding: var(--space-xs);
@@ -44,7 +50,18 @@ $pairs: (
     }
 }
 
+body {
+    margin: var(--space-md);
+}
 
+nav a {
+    margin-bottom: var(--space-xxs);
+}
+
+p {
+    text-indent: 2em;
+    margin: var(--space-sm);
+}
 
 h1, h2, h3, h4, form legend {
     margin-bottom: var(--space-xxs);

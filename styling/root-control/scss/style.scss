@@ -19,6 +19,12 @@ a {
     }
 }
 
+pre {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    overflow-x: auto;
+    padding: 0 var(--component-padding);
+}
+
 .heading1 {
     margin-bottom: 0;
 }
@@ -62,4 +68,31 @@ a {
     font-size: var(--text-sm);
     border: 1px solid black;
     padding: var(--component-padding);
+    margin-bottom: var(--space-md)
+}
+
+// Breakpoints
+@media (max-width: 768px) {
+    :root {
+        --text-base-size: 1em;
+        --space-unit: 1.1em;
+    }
+
+    .heading1 {
+        text-align: center;
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    :root {
+        --text-base-size: 1.1em;
+        --text-scale-ratio: 1.225;
+        --space-unit: 1em;
+    }
+}
+@media (min-width: 1024px) {
+    :root {
+        --text-base-size: 1.2em;
+        --text-scale-ratio: 1.25;
+        --space-unit: 1.3em;
+    }
 }

@@ -12,12 +12,12 @@ Typography
 
     /* type scale */
     --text-xxs: .5em;
-    --text-xs: calc(1em / var(--text-scale-ratio) / var(--text-scale-ratio));
-    --text-sm: calc(1em / var(--text-scale-ratio));
-    --text-md: calc(1em * var(--text-scale-ratio));
-    --text-lg: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio));
-    --text-xl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
-    --text-xxl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+    --text-xs: calc(var(--text-base-size) / var(--text-scale-ratio) / var(--text-scale-ratio));
+    --text-sm: calc(var(--text-base-size) / var(--text-scale-ratio));
+    --text-md: calc(var(--text-base-size) * var(--text-scale-ratio));
+    --text-lg: calc(var(--text-base-size) * var(--text-scale-ratio) * var(--text-scale-ratio));
+    --text-xl: calc(var(--text-base-size) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+    --text-xxl: calc(var(--text-base-size) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
 
     /* line-height */
     --heading-line-height: 1.2;
@@ -34,11 +34,9 @@ Typography
 body {
     font-size: var(--text-base-size);
     font-family: var(--font-primary);
-    color: var(--color-text);
 }
 
 h1, h2, h3, h4, form legend {
-    color: var(--color-text-heading);
     line-height: var(--heading-line-height);
 }
 
@@ -73,14 +71,6 @@ h4, .text-md {
 
 p {
     line-height: var(--body-line-height);
-}
-
-a {
-    color: var(--color-link);
-
-    &:visited {
-        color: var(--color-link-visited);
-    }
 }
 
 b, strong {

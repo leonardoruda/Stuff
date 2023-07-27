@@ -74,7 +74,7 @@
                     (xxl, calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio)))
                 );
 
-                @each $margin in $margins {
+                @each $pair in $pairs {
                     $key: nth($pair, 1);
                     $value: nth($pair, 2);
                     .m-#{$key} {
