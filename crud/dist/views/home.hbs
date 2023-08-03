@@ -1,0 +1,18 @@
+{{> header}}
+<section>
+    <h1>HomePage</h1>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore sapiente, delectus dolor rerum dolore ipsa non accusantium natus esse blanditiis, dolores minima mollitia adipisci eaque fuga itaque eos repudiandae. Inventore, fuga quia eveniet maiores tempora nostrum. Magnam voluptates molestias sequi at beatae hic quod quidem, culpa, unde nihil tempore sapiente?
+    </p>
+    <hr>
+
+    {{#if listExists}}
+    <h1>Membros registrados</h1>
+    <ul>
+        {{#each members}}
+            <li>{{this.name}} — {{this.email}}</li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</section>
+
+{{> footer}}

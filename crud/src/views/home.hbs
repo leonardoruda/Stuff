@@ -1,0 +1,31 @@
+{{> header}}
+
+<section>
+    <h1>Faça parte da companhia!</h1>
+    <form action="/api/" method="POST">
+        <label for="name">Nome:
+            <input type="text" name="name" required="true" placeholder="Escreva seu nome">
+        </label>
+        <label for="email">Email:
+            <input type="email" name="email" required="true" placeholder="Email">
+        </label>
+        <input type="submit" value="Adicionar Membro">
+    </form>
+</section>
+
+<hr>
+
+<section>
+    {{#if listExists}}
+    <h1>Membros registrados</h1>
+    <div class="list">
+        <ul>
+            {{#each members}}
+                <li>{{this.name}} — {{this.email}} <a href="/api/{{this._id}}/delete"><button>Excluir</button></a>
+            {{/each}}
+        </ul>
+    </div>
+    {{/if}}
+</section>
+
+{{> footer}}
