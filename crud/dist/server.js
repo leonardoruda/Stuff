@@ -9,7 +9,6 @@ const mongo_1 = require("./instances/mongo");
 const router_1 = __importDefault(require("./routes/router"));
 const path = require('path');
 require('dotenv').config();
-//aaaaa
 const server = (0, express_1.default)();
 (0, mongo_1.mongoConnect)();
 const hbs = (0, express_handlebars_1.create)({

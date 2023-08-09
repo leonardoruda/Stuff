@@ -25,9 +25,9 @@
                     <li>{{this.name}} — {{this.email}}</li>
                     <div class="btns">
                         <input type="submit" value="Editar">
-                        <a href="/api/{{this._id}}/delete"><button>Excluir</button></a>
                         <input type="hidden" name="name" value="{{this.name}}">
                         <input type="hidden" name="email" value="{{this.email}}">
+                        <button><a href="/api/{{this._id}}/delete">Excluir</a></button>
                     </div>
                 </form>
             {{/each}}

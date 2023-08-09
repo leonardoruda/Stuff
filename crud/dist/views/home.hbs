@@ -1,17 +1,38 @@
 {{> header}}
-<section>
-    <h1>HomePage</h1>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore sapiente, delectus dolor rerum dolore ipsa non accusantium natus esse blanditiis, dolores minima mollitia adipisci eaque fuga itaque eos repudiandae. Inventore, fuga quia eveniet maiores tempora nostrum. Magnam voluptates molestias sequi at beatae hic quod quidem, culpa, unde nihil tempore sapiente?
-    </p>
-    <hr>
 
+<section>
+    <h1>Faça parte da companhia!</h1>
+    <form action="/api/" method="POST">
+        <label for="name">Nome:
+            <input type="text" name="name" required="true" placeholder="Digite seu nome">
+        </label>
+        <label for="email">Email:
+            <input type="email" name="email" required="true" placeholder="Digite seu mail">
+        </label>
+        <input type="submit" value="Adicionar Membro">
+    </form>
+</section>
+
+<hr>
+
+<section>
     {{#if listExists}}
     <h1>Membros registrados</h1>
-    <ul>
-        {{#each members}}
-            <li>{{this.name}} — {{this.email}}</li>
-        {{/each}}
-    </ul>
+    <div class="list">
+        <ul>
+            {{#each members}}
+                <form action="/api/{{this._id}}/edit" method="POST">
+                    <li>{{this.name}} — {{this.email}}</li>
+                    <div class="btns">
+                        <input type="submit" value="Editar">
+                        <input type="hidden" name="name" value="{{this.name}}">
+                        <input type="hidden" name="email" value="{{this.email}}">
+                        <button><a href="/api/{{this._id}}/delete">Excluir</a></button>
+                    </div>
+                </form>
+            {{/each}}
+        </ul>
+    </div>
     {{/if}}
 </section>
 
