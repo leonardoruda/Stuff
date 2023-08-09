@@ -20,9 +20,7 @@ h1, h2, h3, h4 {
 form {
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
     align-items: center;
-
 }
 input {
     padding: 3px;
@@ -33,6 +31,20 @@ input[type=submit] {
     padding: 5px;
     border: 0.5px solid black;
     border-radius: 5px;
+}
+input[type=submit]:hover {
+    cursor: pointer;
+}
+.list input[type=submit] {
+    margin: 0 0 10px 5px;
+}
+
+#btn-cancel {
+    margin-left: 5%;
+}
+#btn-cancel > a {
+    text-decoration: none;
+    color: black;
 }
 
 hr {
@@ -56,14 +68,31 @@ div.list {
 
 ul {
     display: grid;
-    grid-template-columns: repeat(2, minmax(50%, auto));
-    gap: 5px 5px;
+    grid-template-columns: repeat(2, minmax(auto, 50%));
+    gap: 5px 40px;
     list-style-type: none;
 }
 
+ul > form {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+div.btns {
+    width: 30%;
+}
+
+
 button {
-    padding: 3px;
+    padding: 5px;
     margin: 0 0 10px 5px;
+    border: 0.5px solid black;
+    border-radius: 5px;
+}
+button:hover {
+    cursor: pointer;
 }
 
 
@@ -81,8 +110,16 @@ footer {
     bottom: 0;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1120px) {
     ul {
-        grid-template-columns: repeat(3, minmax(32.5%, auto));
+        grid-template-columns: repeat(3, minmax(auto, 32.5%));
+    }
+
+    div.btns {
+        width: 50%;
+    }
+    
+    #btn-cancel {
+        margin-left: 2.5%;
     }
 }

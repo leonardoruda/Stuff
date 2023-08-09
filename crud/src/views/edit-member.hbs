@@ -1,0 +1,19 @@
+{{> header}}
+
+<section>
+    <h1>Alterar informações</h1>
+    <form action="/api/{{member.id}}/update" method="POST">
+        <label for="name">Nome:
+            <input type="text" name="name" required="true" value="{{member.name}}">
+        </label>
+        <label for="email">Email:
+            <input type="email" name="email" required="true" value="{{member.email}}">
+        </label>
+        <input type="submit" value="Atualizar Membro">
+        <button id="btn-cancel"><a href="javascript:history.back()">Cancelar</a></button>
+    </form>
+</section>
+
+<hr>
+
+{{> footer}}

@@ -4,10 +4,10 @@
     <h1>Faça parte da companhia!</h1>
     <form action="/api/" method="POST">
         <label for="name">Nome:
-            <input type="text" name="name" required="true" placeholder="Escreva seu nome">
+            <input type="text" name="name" required="true" placeholder="Digite seu nome">
         </label>
         <label for="email">Email:
-            <input type="email" name="email" required="true" placeholder="Email">
+            <input type="email" name="email" required="true" placeholder="Digite seu mail">
         </label>
         <input type="submit" value="Adicionar Membro">
     </form>
@@ -21,7 +21,15 @@
     <div class="list">
         <ul>
             {{#each members}}
-                <li>{{this.name}} — {{this.email}} <a href="/api/{{this._id}}/delete"><button>Excluir</button></a>
+                <form action="/api/{{this._id}}/edit" method="POST">
+                    <li>{{this.name}} — {{this.email}}</li>
+                    <div class="btns">
+                        <input type="submit" value="Editar">
+                        <a href="/api/{{this._id}}/delete"><button>Excluir</button></a>
+                        <input type="hidden" name="name" value="{{this.name}}">
+                        <input type="hidden" name="email" value="{{this.email}}">
+                    </div>
+                </form>
             {{/each}}
         </ul>
     </div>
